@@ -11,6 +11,7 @@ const AgeGroupSelect = ({ onChange, isOverlap }) => {
     if (startAge !== null && endAge !== null) {
       onChange(startAge, endAge);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startAge, endAge]);
 
   const handleStartAgeChange = (value) => {
