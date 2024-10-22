@@ -23,7 +23,7 @@ function App() {
      * $ 匹配到字符串末尾。
      */
     const regex = /\d{1,3}(?=(\d{3})+$)/g;
-    let stringValue = e.target.value.toString().replaceAll(",", "");
+    let stringValue = e.target.value.toString();
     let [integerPart, decimalPart] = parseFloat(stringValue)
       .toString()
       .split(".");

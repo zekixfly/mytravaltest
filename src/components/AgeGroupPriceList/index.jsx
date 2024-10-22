@@ -5,18 +5,15 @@ import PriceInput from "../PriceInput";
 import AgeGroupSelect from "../AgeGroupSelect";
 
 const handleGetNumberIntervals = (priceList) => {
-  let ranges = priceList.map((item) => ({
-    id: item.id,
-    ageGroup: item.ageGroup,
-  }));
-  ranges.sort((a, b) => a.ageGroup[0] - b.ageGroup[0]);
+  let clonePriceList = [...priceList];
+  clonePriceList.sort((a, b) => a.ageGroup[0] - b.ageGroup[0]);
 
   let overlappingIds = [];
 
-  for (let i = 0; i < ranges.length - 1; i++) {
-    let current = ranges[i];
-    for (let j = i + 1; j < ranges.length; j++) {
-      let next = ranges[j];
+  for (let i = 0; i < clonePriceList.length - 1; i++) {
+    let current = clonePriceList[i];
+    for (let j = i + 1; j < clonePriceList.length; j++) {
+      let next = clonePriceList[j];
       // 如果區間重疊
       if (current.ageGroup[1] >= next.ageGroup[0]) {
         if (!overlappingIds.includes(current.id)) {
@@ -54,10 +51,10 @@ const AgeGroupPriceList = ({ onChange }) => {
 
   // 當價格改變時更新
   const handlePriceChange = (id, newPrice) => {
-    const newPriceList = [...priceList];
-    newPriceList.find((item) => item.id === id).price = newPrice;
-    setPriceList(newPriceList);
-    onChange(newPriceList);
+    // const newPriceList = [...priceList];
+    priceList.find((item) => item.id === id).price = newPrice;
+    setPriceList(priceList);
+    onChange(priceList);
   };
 
   // 新增一個價格設定
