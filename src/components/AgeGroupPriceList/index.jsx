@@ -41,20 +41,22 @@ const AgeGroupPriceList = ({ onChange }) => {
     setOverlappingIds(overlaps);
   }, [priceList]);
 
+  const updatePriceList = (priceList) => {
+    setPriceList(priceList);
+    onChange(priceList);
+  };
+
   // 當年齡範圍改變時更新
   const handleAgeGroupChange = (id, startAge, endAge) => {
     const newPriceList = [...priceList];
     newPriceList.find((item) => item.id === id).ageGroup = [startAge, endAge];
-    setPriceList(newPriceList);
-    onChange(newPriceList);
+    updatePriceList(newPriceList);
   };
 
   // 當價格改變時更新
   const handlePriceChange = (id, newPrice) => {
-    // const newPriceList = [...priceList];
     priceList.find((item) => item.id === id).price = newPrice;
-    setPriceList(priceList);
-    onChange(priceList);
+    updatePriceList(priceList);
   };
 
   // 新增一個價格設定
@@ -68,8 +70,7 @@ const AgeGroupPriceList = ({ onChange }) => {
   // 移除一個價格設定
   const removePriceSetting = (id) => {
     const newPriceList = priceList.filter((item) => item.id !== id);
-    setPriceList(newPriceList);
-    onChange(newPriceList);
+    updatePriceList(newPriceList);
   };
 
   return (
